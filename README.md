@@ -1,5 +1,5 @@
 # EX01 Developing a Simple Webserver
-## Date:
+## Date:17/11/2026
 
 ## AIM:
 To develop a simple webserver to serve html pages and display the Device Specifications of your Laptop.
@@ -37,8 +37,70 @@ Open a browser and navigate to http://127.0.0.1:8000 (or the assigned port).
 
 ## PROGRAM:
 
+from http.server import HTTPServer, BaseHTTPRequestHandler
+
+content = """
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Top 5 Revenue Generating Software Companies</title>
+</head>
+<body>
+    <table>
+        <caption>Top 5 Revenue Generating Software Companies</caption>
+        <tr>
+            <th>s.no</th>
+            <th>companies</th>
+            <th>revenue</th>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>Microsoft</td>
+            <td>65 billion</td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>Oracle</td>
+            <td>29.6 billion</td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td>IBM</td>
+            <td>29.1 billion</td>
+        </tr>
+        <tr>
+            <td>4</td>
+            <td>SAP</td>
+            <td>6.4 billion</td>
+        </tr>
+        <tr>
+            <td>5</td>
+            <td>Symantec</td>
+            <td>5.6 billion</td>
+        </tr>
+    </table>
+</body>
+</html>
+"""
+
+class MyHandler(BaseHTTPRequestHandler):
+    def do_GET(self):
+        print("Request received")
+        self.send_response(200)
+        self.send_header('Content-type', 'text/html; charset=utf-8')
+        self.end_headers()
+        self.wfile.write(content.encode())
+
+server_address = ('', 8000)
+httpd = HTTPServer(server_address, MyHandler)
+print("My webserver is running...")
+httpd.serve_forever()
 
 ## OUTPUT:
+<img width="1016" height="280" alt="Screenshot 2026-11-17 141455" src="https://github.com/user-attachments/assets/12c09302-7f6e-467d-8c5c-93d9b5cacbae" />
+
+<img width="707" height="601" alt="Screenshot 2026-11-17 141633" src="https://github.com/user-attachments/assets/782accda-46f7-4175-9902-3f843d560240" />
+
 
 ## RESULT:
 The program for implementing simple webserver is executed successfully.
